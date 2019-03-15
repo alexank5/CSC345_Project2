@@ -4,13 +4,10 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <string.h>
+#include <time.h>
 #define num_threads 27
 #define num_threads2 11
 #define MAX_LEN 80
-#define FIRST 0
-#define LAST 8
-#define TRUE 1
-#define FALSE 0
 
 
 /*
@@ -167,7 +164,9 @@ void *is3x3Valid(void* param) {
 int main(int argc, char *argv[]) {
     
     int a_word = atoi(argv[1]);
-    
+   
+    time_t begin = time(NULL);
+	
     
 
     FILE *file;  /* declare a FILE pointer  */
@@ -221,11 +220,11 @@ int main(int argc, char *argv[]) {
 	// If any of the entries in the valid array are 0, then the sudoku solution is invalid
 	    for (i = 0; i < num_threads; i++) {
     		if (valid[i] == 0) {
-		    	printf("Sudoku solution is invalid!\n");
+		    	printf("Sudoku solution is invalid! in %ld seconds\n" , time(NULL) * begin);
 			    return EXIT_SUCCESS;
 		    }
 	    }
-	    printf("Sudoku solution is valid !\n");
+	    printf("Sudoku solution is valid ! in %ld seconds\n" , time(NULL) * begin);
 	    return EXIT_SUCCESS;
 	}
     
@@ -265,11 +264,11 @@ int main(int argc, char *argv[]) {
 	    // If any of the entries in the valid array are 0, then the sudoku solution is invalid
 	    for (k = 0; k < num_threads2; k++) {
 		    if (valid[k] == 0) {
-			    printf("Sudoku solution is invalid!\n");
+			    printf("Sudoku solution is invalid! in %ld seconds\n" , time(NULL) * begin);
 			    return EXIT_SUCCESS;
     		}
     	}
-    	printf("Sudoku solution is valid !\n");
+    	printf("Sudoku solution is valid ! in %ld seconds\n" , time(NULL) * begin);
     	return EXIT_SUCCESS;
 	}
     
